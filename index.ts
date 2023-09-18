@@ -19,13 +19,13 @@ cron.schedule('*/5 * * * 6,7', async () => {
   // Every 5 minutes on weekends
   await run();
 });
-console.info('Tasks.');
+console.info('Tasks scheduled.');
 
 async function run() {
   const items = await scrap();
   items.forEach(async (item: any) => {
-    await send(item);
     console.log(`[${item.template_key}][${item.sites}] ${item.name} (${item.id})`);
+    await send(item);
   });
   if (items.length === 0) {
     console.debug(`No new items.`);
