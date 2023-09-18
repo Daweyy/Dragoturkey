@@ -8,15 +8,15 @@ console.info('Loaded known items.');
 Bun.env.TZ = 'Europe/Paris';
 
 cron.schedule('* 6-21 * * 1-5', async () => {
-  console.log('Every minute between 6:00 and 21:00 on Monday to Friday');
+  // Every minute between 6am and 9pm on weekdays
   await run();
 });
 cron.schedule('*/5 1,2,3,4,5,22,23 * * 1-5', async () => {
-  console.log('Every 5 minutes between 1:00 and 5:00 and between 22:00 and 23:00 on Monday to Friday');
+  // Every 5 minutes between 1am and 5am and between 10pm and 11pm on weekdays
   await run();
 });
 cron.schedule('*/5 * * * 6,7', async () => {
-  console.log('Every 5 minutes on Saturday and Sunday');
+  // Every 5 minutes on weekends
   await run();
 });
 console.info('Tasks.');
