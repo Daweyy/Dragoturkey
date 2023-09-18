@@ -1,7 +1,7 @@
 const TEMPLATES: String[] = ['NEWS', 'BLOG', 'CHANGELOG'];
 const IGNORED_SITES: String[] = ['DOFUS_TOUCH', 'ALLSKREEN', 'KROSMOZ_WEBTOONS'];
 const JSON_PATH = './data.json';
-const COUNT = 5;
+const COUNT = 15;
 
 let knownIds: any[] = [];
 
