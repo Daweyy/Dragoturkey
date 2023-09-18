@@ -1,0 +1,9 @@
+services:
+  dragoturkey:
+    image: over/bun:latest
+    command: bun run start
+    restart: unless-stopped
+    container_name: dragoturkey
+    working_dir: /app
+    volumes:
+      - .:/app
