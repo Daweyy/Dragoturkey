@@ -1,7 +1,7 @@
 services:
   dragoturkey:
     image: oven/bun:latest
-    command: bun run start
+    command: bun install && bun run start
     restart: unless-stopped
     container_name: dragoturkey
     working_dir: /app
