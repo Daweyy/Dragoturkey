@@ -1,6 +1,6 @@
 services:
   dragoturkey:
-    image: over/bun:latest
+    image: oven/bun:latest
     command: bun run start
     restart: unless-stopped
     container_name: dragoturkey
