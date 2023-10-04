@@ -3,13 +3,14 @@ const IGNORED_SITES: String[] = ['DOFUS_TOUCH', 'ALLSKREEN', 'KROSMOZ_WEBTOONS']
 const JSON_PATH = './data.json';
 const COUNT = 15;
 
-let knownIds: any[] = [];
+let knownIds: number[] = [];
 
 export async function scrap() {
   let items: any[] = [];
   for (const template of TEMPLATES) {
     const res = await fetch(`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=ALL&lang=fr&page=1&count=${COUNT}`);
     const results = await res.json();
+
     for (const item of results) {
       for (const site of item.sites) {
         if (!IGNORED_SITES.includes(site) && !items.includes(item) && !knownIds.includes(+item.id)) {
@@ -46,5 +47,6 @@ async function save() {
     'items': knownIds
   };
   await Bun.write(JSON_PATH, JSON.stringify(object));
-  console.debug(`Saved known items.`);
+  if (Bun.env.DEBUG)
+    console.debug(`Saved known items.`);
 }

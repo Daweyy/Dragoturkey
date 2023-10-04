@@ -24,10 +24,11 @@ console.info('Tasks scheduled.');
 async function run() {
   const items = await scrap();
   items.forEach(async (item: any) => {
-    console.log(`[${item.template_key}][${item.sites}] ${item.name} (${item.id})`);
+    console.info(`[${item.template_key}][${item.sites}] ${item.name} (${item.id})`);
     await send(item);
   });
-  if (items.length === 0) {
+  if (items.length === 0 && Bun.env.DEBUG) {
     console.debug(`No new items.`);
   }
+  Bun.gc(true);
 }
