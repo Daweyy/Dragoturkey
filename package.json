@@ -1,5 +1,7 @@
 {
   "name": "dragoturkey",
+  "version": "1.0.0",
+  "author": "Dawey",
   "module": "index.ts",
   "type": "module",
   "scripts": {

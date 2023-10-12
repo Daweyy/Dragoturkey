@@ -7,6 +7,7 @@ await load();
 console.info('Loaded known items.');
 Bun.env.TZ = 'Europe/Paris';
 
+// /!\ Feel free to edit the cron expressions but keep in mind that Ankama's API is rate limited, check COUNT in haapi.ts
 cron.schedule('* 6-21 * * 1-5', async () => {
   // Every minute between 6am and 9pm on weekdays
   await run();

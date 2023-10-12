@@ -3,12 +3,14 @@ import { add } from './haapi';
 
 const client = new WebhookClient({ url: process.env.DISCORD_WEBHOOK_URL! });
 
+//in case you want to change the colors
 const COLORS_TEMPLATES: Record<string, ColorResolvable> = {
     'NEWS': '#40bb12',
     'BLOG': '#1334c6',
     'CHANGELOG': '#c61313'
 };
 
+//because we want beautiful names
 const SITES_TEMPLATES: Record<string, string> = {
     'DOFUS_TOUCH': 'Dofus Touch',
     'WAKFU': 'Wakfu',

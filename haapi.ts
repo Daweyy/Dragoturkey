@@ -1,7 +1,7 @@
 const TEMPLATES: String[] = ['NEWS', 'BLOG', 'CHANGELOG'];
-const IGNORED_SITES: String[] = ['DOFUS_TOUCH', 'ALLSKREEN', 'KROSMOZ_WEBTOONS'];
+const IGNORED_SITES: String[] = ['DOFUS_TOUCH', 'ALLSKREEN', 'KROSMOZ_WEBTOONS']; //full list of SITES_TEMPLATES in discord.ts 
 const JSON_PATH = './data.json';
-const COUNT = 15;
+const COUNT = 15; //don't go too high or you'll get rate limited (max 60req/min)
 
 let knownIds: number[] = [];
 
