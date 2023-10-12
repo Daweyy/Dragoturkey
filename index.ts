@@ -30,5 +30,4 @@ async function run() {
   if (items.length === 0 && Bun.env.DEBUG) {
     console.debug(`No new items.`);
   }
-  Bun.gc(true);
 }
