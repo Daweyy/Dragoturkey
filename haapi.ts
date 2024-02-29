@@ -16,6 +16,11 @@ export async function scrap() {
 			`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=ALL&lang=fr&page=1&count=${COUNT}`,
 		);
 
+		if (!res.ok) {
+			console.error(`Error while fetching: ${res.statusText} (${res.status})`); // some providers are banned since 26.02.2024 => 403, might help to identify
+			return [];
+		}
+
 		const results = await res.json();
 
 		for (const item of results) {
