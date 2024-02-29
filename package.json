@@ -8,6 +8,7 @@
     "start": "bun run index.ts"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.5.3",
     "@types/node-cron": "^3.0.8",
     "bun-types": "latest"
   },
