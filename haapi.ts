@@ -13,8 +13,8 @@ export async function scrap() {
 	const items: any[] = []; //FIXME: type me properly please (°~°)
 	for (const template of TEMPLATES) {
 		const res = await fetch(
-			`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=ALL&lang=fr&page=1&count=${COUNT}`,
-		);
+			`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=*&lang=fr&page=1&count=${COUNT}`, 
+		); // Using wildcard for site since "ALL" has a weird behavior
 
 		if (!res.ok) {
 			console.error(`Error while fetching: ${res.statusText} (${res.status})`); // some providers are banned since 26.02.2024 => 403, might help to identify
