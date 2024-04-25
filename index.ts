@@ -5,7 +5,6 @@ import { load, scrap } from "./haapi";
 console.info("Dragoturkey is starting ...");
 await load();
 console.info("Loaded known items.");
-Bun.env.TZ = "Europe/Paris";
 
 // /!\ Feel free to edit the cron expressions but keep in mind that Ankama's API is rate limited (60req/min)
 cron.schedule("* 6-21 * * 1-5", async () => {
