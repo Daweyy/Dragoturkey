@@ -1,4 +1,4 @@
-import { ColorResolvable, EmbedBuilder, WebhookClient } from "discord.js";
+import { type ColorResolvable, EmbedBuilder, WebhookClient } from "discord.js";
 import { add } from "./haapi";
 
 const client = new WebhookClient({
