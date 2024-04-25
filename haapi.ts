@@ -10,20 +10,20 @@ const COUNT = 15; //currently has to be less than 20 because haapi limitations
 let knownIds: number[] = [];
 
 export async function scrap() {
-	const items: any[] = []; //FIXME: type me properly please (°~°)
+	const items: any[] = []; //FIXME
 	for (const template of TEMPLATES) {
-		const res = await fetch(
-			`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=*&lang=fr&page=1&count=${COUNT}`, 
-		); // Using wildcard for site since "ALL" has a weird behavior
+    // Using wildcard for site since "ALL" has a weird behavior
+		const res = await fetch(`https://haapi.ankama.com/json/Ankama/v5/Cms/Items/Get?template_key=${template}&site=*&lang=fr&page=1&count=${COUNT}`);
 
 		if (!res.ok) {
-			console.error(`Error while fetching: ${res.statusText} (${res.status})`); // some providers are banned since 26.02.2024 => 403, might help to identify
+      // some providers are banned since 26.02.2024 => 403, might help to identify
+			console.error(`Error while fetching: ${res.statusText} (${res.status})`);
 			return [];
 		}
 
 		const results = await res.json();
 
-		for (const item of results) {
+		for (const item of results) { //FIXME
 			for (const site of item.sites) {
 				if (
 					!IGNORED_SITES.includes(site) &&

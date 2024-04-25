@@ -24,9 +24,7 @@ console.info("Tasks scheduled.");
 async function run() {
 	const items = await scrap();
 	for (const item of items) {
-		console.info(
-			`[${item.template_key}][${item.sites}] ${item.name} (${item.id})`,
-		);
+		console.info(`[${item.template_key}][${item.sites}] ${item.name} (${item.id})`);
 		await send(item);
 	}
 	if (items.length === 0 && Bun.env.DEBUG) {
