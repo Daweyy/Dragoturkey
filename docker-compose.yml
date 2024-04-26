@@ -1,9 +1,8 @@
 services:
   dragoturkey:
-    image: oven/bun:latest
-    command: bash -c "bun install && bun run start"
+    image: ghcr.io/daweyy/dragoturkey:main
     restart: unless-stopped
     container_name: dragoturkey
-    working_dir: /app
     volumes:
-      - .:/app
+      - ./.env:/app/.env
+      - ./data.json:/app/data.json
