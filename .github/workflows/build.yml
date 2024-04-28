@@ -1,6 +1,7 @@
 name: Docker publish
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
