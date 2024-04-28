@@ -1,5 +1,5 @@
 import { type ColorResolvable, EmbedBuilder, WebhookClient } from "discord.js";
-import { add } from "./haapi";
+import { type ICmsArticle, add } from "./haapi";
 
 const client = new WebhookClient({
 	url: process.env.DISCORD_WEBHOOK_URL || "",
@@ -49,16 +49,7 @@ const SITES_TEMPLATES: Record<string, string> = {
 	WAKFU_TCG: "Wakfu TCG",
 };
 
-export async function send(item: {
-	name: string;
-	canonical_url: string;
-	image_url: string;
-	template_key: string;
-	timestamp: number;
-	baseline_raw: string;
-	id: number;
-	sites: string[];
-}) {
+export async function send(item: ICmsArticle) {
 	try {
 		const sites: string[] = [];
 		for (const site of item.sites) {
@@ -71,7 +62,7 @@ export async function send(item: {
 			.setTitle(item.name || "Untitled")
 			.setURL(item.canonical_url)
 			.setImage(item.image_url)
-			.setColor(COLORS_TEMPLATES[item.template_key])
+			.setColor(item.template_key ? COLORS_TEMPLATES[item.template_key] : "#000000")
 			.setFooter({ text: `${sites.join(", ")} (${item.template_key})` });
 
 		if (item.baseline_raw !== null) {
@@ -81,7 +72,7 @@ export async function send(item: {
 		await client.send({
 			embeds: [embed],
 		});
-		await add(item.id);
+		await add(+item.id);
 	} catch (error) {
 		console.error(`Error while sending ${item.id} to Discord: ${error}`);
 	}
