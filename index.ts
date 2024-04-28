@@ -19,6 +19,10 @@ cron.schedule("*/5 * * * 6,7", async () => {
 	// Every 5 minutes on weekends
 	await run();
 });
+if(Bun.env.DEBUG) {
+  console.info("[DEBUG] Running tasks immediately.");
+  await run();
+}
 console.info("Tasks scheduled.");
 
 async function run() {
