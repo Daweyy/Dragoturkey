@@ -1,9 +1,4 @@
 const TEMPLATES: string[] = ["NEWS", "BLOG", "CHANGELOG"];
-const IGNORED_SITES: string[] = [
-  "DOFUS_TOUCH",
-  "ALLSKREEN",
-  "KROSMOZ_WEBTOONS",
-]; //full list of SITES_TEMPLATES in discord.ts
 const JSON_PATH = "./data.json";
 const COUNT = 15; //currently has to be less than 20 because haapi limitations
 
@@ -48,10 +43,9 @@ export async function scrap() {
 
     const results = await res.json();
 
-		for (const item of results) { //FIXME
+    for (const item of results) { //FIXME
       for (const site of item.sites) {
         if (
-          !IGNORED_SITES.includes(site) &&
           !items.includes(item) &&
           !knownIds.includes(+item.id)
         ) {
@@ -81,6 +75,7 @@ export async function load() {
       await save();
     }
   }
+  console.info("Known items loaded");
 }
 
 async function save() {
@@ -88,5 +83,4 @@ async function save() {
     items: knownIds,
   };
   await Bun.write(JSON_PATH, JSON.stringify(object));
-  if (Bun.env.DEBUG) console.debug("Saved known items.");
 }
