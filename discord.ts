@@ -1,10 +1,6 @@
 import { type ColorResolvable, EmbedBuilder, WebhookClient } from "discord.js";
 import { type ICmsArticle, add } from "./haapi";
 
-const client = new WebhookClient({
-	url: process.env.DISCORD_WEBHOOK_URL || "",
-});
-
 //in case you want to change the colors
 const COLORS_TEMPLATES: Record<string, ColorResolvable> = {
 	NEWS: "#40bb12",
@@ -49,8 +45,10 @@ const SITES_TEMPLATES: Record<string, string> = {
 	WAKFU_TCG: "Wakfu TCG",
 };
 
-export async function send(item: ICmsArticle) {
+export async function send(item: ICmsArticle, url: string, threadId: string) {
 	try {
+		const client = new WebhookClient({ url });
+
 		const sites: string[] = [];
 		for (const site of item.sites) {
 			if (!sites.includes(SITES_TEMPLATES[site] || site)) {
@@ -62,7 +60,9 @@ export async function send(item: ICmsArticle) {
 			.setTitle(item.name || "Untitled")
 			.setURL(item.canonical_url)
 			.setImage(item.image_url)
-			.setColor(item.template_key ? COLORS_TEMPLATES[item.template_key] : "#000000")
+			.setColor(
+				item.template_key ? COLORS_TEMPLATES[item.template_key] : "#000000",
+			)
 			.setFooter({ text: `${sites.join(", ")} (${item.template_key})` });
 
 		if (item.baseline_raw !== null) {
@@ -71,6 +71,7 @@ export async function send(item: ICmsArticle) {
 
 		await client.send({
 			embeds: [embed],
+			threadId: threadId,
 		});
 		await add(+item.id);
 	} catch (error) {
